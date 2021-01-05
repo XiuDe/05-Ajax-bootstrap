@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XMLHttpRequest_level_2</title>
+    <script>
+        // 1、旧版XMLHttpRequest的缺点
+        // ① 只支持文本数据的传输，无法用来读取和上传文件
+        // ② 传送和接收数据时，没有进度信息，只能提示有没有完成
+        // 2、XMLHttpRequest Level2的新功能
+        // ① 可以设置HTTP请求的时限
+        // ② 可以使用FormData对象管理表单数据
+        // ③ 可以上传文件
+        // ④ 可以获得数据传输的进度信息
+    </script>
+    <script>
+        // 1、设置HTTP请求时限
+        // xhr.timeout = 3000;
+        //xhr.ontimeout = function(event){
+        // alert('请求超时！')
+        // }
+        var xhr = new XMLHttpRequest();
+        // 设置超时时间
+        xhr.timeout = 3000;
+        xhr.ontimeout = function() {
+            console.log('请求超时了！');
+        }
+        xhr.open('GET', 'http://www.liulongbin.top:3006/api/getbooks');
+        xhr.send();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log('xhr:', xhr);
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节流</title>
+    <script src="./lib/jquery.js"></script>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        #angel {
+            position: absolute;
+        }
+    </style>
+    <!-- 1、节流应用场景
+         ① 鼠标连续不断的触发某事件（如点击），只在单位事件内触发一次；
+         ② 懒加载时要监听计算滚动条的位置，但不必每次滑动都触发，可以降低计算的频率，而不必去浪费CPU资源。
+    -->
+</head>
+
+<body>
+    <img src="./images/angel.gif" alt="" id="angel" />
+    <script>
+        // 一、不使用节流方式
+        // 1、获取到图片
+        // var angel = $('#angel');
+        // // 2、绑定mousemove事件
+        // $(document).on('mousemove', function(e) {
+        //     // console.log(e.pageX);
+        //     // console.log(e.pageY);
+        //     $(angel).css('top', e.pageY + 'px').css('left', e.pageX)
+        // });
+        //二、节流阀
+        //节流阀为空，可以执行下次操作；不为空，表示不能执行下次操作
+        $(function() {
+            var angel = $('#angel');
+            var timer = null;
+            $(document).on('mousemove', function(e) {
+                if (timer) return;
+                timer = setTimeout(function() {
+                    $(angel).css('top', e.pageY + 'px').css('left', e.pageX);
+                    timer = null;
+                }, 16)
+            })
+        })
+    </script>
+</body>
+
+</html>

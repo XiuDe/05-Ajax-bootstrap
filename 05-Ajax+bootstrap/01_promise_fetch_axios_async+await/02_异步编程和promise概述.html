@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>异步编程和promise概述</title>
+    <script src="./js/vue.js"></script>
+    <script src="./js/jquery.js"></script>
+</head>
+
+<body>
+    <script>
+        $ajax({
+            url: '',
+            success: function(data) {
+                console.log('$ajax_success:data', data);
+            },
+        });
+    </script>
+</body>
+
+</html>

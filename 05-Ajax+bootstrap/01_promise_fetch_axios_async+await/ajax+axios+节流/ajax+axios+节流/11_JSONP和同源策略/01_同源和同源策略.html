@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>同源策略</title>
+</head>
+
+<body>
+    <!-- 1、同源 -->
+    <!-- 如果两个页面的协议，域名和端口号都相同，则两个页面具有相同的源 -->
+    <!-- eg: http://www.test.com/index.html -->
+    <!-- http://www.test.com/other.html  是 -->
+    <!-- https://www.test.com/about.html 否 -->
+    <!-- http://blog.test.com/movie.html 否 -->
+    <!-- http://www.test.com:7001/home.html 否 -->
+    <!-- http://www.test.com:80/main 是 -->
+    <!-- 2、同源策略 -->
+    <!-- 同源策略(Same origin policy)是浏览器提供的一个安全功能 -->
+    <!-- MDN：同源策略限制了从同一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的重要安全机制 -->
+    <!-- 通俗的理解：浏览器规定，A网站的JavaScript，不允许和非同源的网站C之间，进行资源的交互，如：
+    ① 无法读取非同源网页的Cookie、LocalStorage和IndexedDB
+    ② 无法接触非同源网页的DOM
+    ③ 无法向非同源地址发送Ajax请求 -->
+</body>
+
+</html>

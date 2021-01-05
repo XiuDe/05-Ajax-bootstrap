@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 1、什么是JSONP？ -->
+<!-- JSONP是JSON的一种使用模式，可用于解决主流浏览器的跨域数据访问问题 -->
+<!-- 2、JSONP实现原理 -->
+<!-- 由于浏览器同源策略的限制,网页中无法通过Ajax请求非同源的接口数据.但是<script>标签不受浏览器同源策略的影响，可以通过src属性，请求非同源的js脚本 -->
+<!-- 因此，JSONP的实现原理，就是通过<script>标签的src属性，请求跨域的数据接口，并通过函数调用的形式，接收跨域接口响应回来的数据。 -->
+<!-- JSONP只支持GET请求，不支持POST -->
+
+<body>
+    <!-- 发起跨域的ajax数据请求 -->
+    <script src="./lib/jquery.js"></script>
+    <script>
+        $.ajax({
+            method: 'GET',
+            url: 'http://liulongbin.top/3006/api/jsonp',
+            data: {
+                name: 'zs',
+                age: 20
+            },
+            success: function(res) {
+                // Access-Control-Allow-Origin -> 跨域
+                console.log(res);
+            }
+        })
+    </script>
+</body>
+
+</html>

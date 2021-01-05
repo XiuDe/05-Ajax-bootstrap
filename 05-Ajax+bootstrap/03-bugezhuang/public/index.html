@@ -1,0 +1,86 @@
+<html>
+
+<head>
+    <title>补个妆</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/base.css" />
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.19.2/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>补个妆</h1>
+        <p>您身边的美妆管家！</p>
+        <p @click="scanCode">扫描二维码</p>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        mounted() {
+            this.wxconfig()
+        },
+        methods: {
+            /*
+             //  本地环境测试数据
+             // http://bugezhuang.applinzi.com/jsapi
+             let url = encodeURIComponent(location.href.split('#')[0]);
+             // , {
+               // https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/JS-SDK.html#62 签名算法要求
+               //   url: encodeURIComponent(location.href.split('#')[0]),
+               // }
+             axios.get(`http://localhost:3000/jsapi?url=${url}`).then((result) => {
+                 console.log("-index-result:", result);
+                 
+                 wx.config({
+                   // debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数       信息会通过log打出，仅在pc端时才会打印。
+                   // appId: "", // 必填，公众号的唯一标识
+                   // timestamp: 0, // 必填，生成签名的时间戳
+                   // nonceStr: "", // 必填，生成签名的随机串
+                   // signature: "", // 必填，签名
+                   // jsApiList: [], // 必填，需要使用的JS接口列表
+                 });
+               });
+              */
+
+            wxconfig() {
+                let url = encodeURIComponent(location.href.split('#')[0]);
+                // 本地测试 http://localhost:3000/jsapi?url=${url}
+                // 新浪云测试 http://bugezhuang.applinzi.com/jsapi?url=${url}
+                axios.get(`http://bugezhuang.applinzi.com/jsapi?url=${url}`).then((result) => {
+                    console.log("-index-result:", result);
+                    //  let {appId, timestamp,nonceStr,signature} = result.data;
+                    console.log(result.data);
+                    wx.config({
+                        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                        ...result.data,
+                        //  appId, // 必填，公众号的唯一标识
+                        //  timestamp, // 必填，生成签名的时间戳
+                        //  nonceStr, // 必填，生成签名的随机串
+                        //  signature, // 必填，签名
+                        jsApiList: [
+                            'scanQRCode',
+                        ], // 必填，需要使用的JS接口列表
+                    });
+                });
+            },
+            scanCode() {
+                wx.scanQRCode({
+                    needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                    scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                    success: function(res) {
+                        var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+                        console.log('调起微信扫一扫', result);
+                    },
+                    fail: function(err) {
+                        console.log('err', err);
+                    }
+                });
+            }
+        }
+    })
+</script>
+
+</html>

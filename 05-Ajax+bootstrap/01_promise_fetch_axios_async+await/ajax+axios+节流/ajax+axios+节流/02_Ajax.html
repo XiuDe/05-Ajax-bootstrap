@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax请求</title>
+</head>
+
+<body>
+    <button id="btnGET">发起不带参数的Get请求</button>
+    <button id="btnGETINFO">发起带参数的Get请求</button>
+    <button id="btnPOST">发起POST请求</button>
+    <button id="btnAJAXGET">AjaxGET请求</button>
+    <button id="btnAJAXPOST">AjaxPOST请求</button>
+
+    <script src="./js/jquery.js">
+    </script>
+    <script>
+        // Ajax全称是Asyncchronous javascript and xml（异步的javascript和xml）
+        //$.get()
+        //$.post()
+        //$.ajax()
+        //一、$.get(url,[data],[callback])
+        // $.get('http://www.liulongbin.top:3006/api/getbooks', function(res) {
+        //     console.log(res); // 服务器返回数据
+        // })
+        // 二、$.post(url, [data],[callback])
+        // 三、$.ajax()
+        // $.ajax({
+        // type:'', // 请求的方式GET或POST
+        // url:'', // 请求的url
+        // data:{}, // 这次请求要携带的参数
+        // success: function(res){} // 请求成功后的回调函数
+        // })
+        $(function() {
+            $('#btnGET').on('click', function() {
+                $.get('http://www.liulongbin.top:3006/api/getbooks', function(res) {
+                    console.log(res);
+                })
+            });
+            $('#btnGETINFO').on('click', function() {
+                $.get('http://www.liulongbin.top:3006/api/getbooks', {
+                        id: 1
+                    },
+                    function(res) {
+                        console.log(res);
+                    })
+            });
+
+            // POST
+            $('#btnPOST').on('click', function() {
+                $.post('http://www.liulongbin.top:3006/api/addbook', {
+                    bookname: '三体',
+                    author: '刘铁柱',
+                    publisher: '天津图书出版社'
+                }, function(res) {
+                    console.log(res);
+                })
+            });
+            // Ajax
+            $('#btnAJAXGET').on('click', function() {
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://www.liulongbin.top:3006/api/getbooks',
+                    data: {
+                        id: 1
+                    },
+                    success: function(res) {
+                        console.log(res);
+                    }
+                })
+            });
+            $('#btnAJAXPOST').on('click', function() {
+                $.ajax({
+                    type: 'post',
+                    url: 'http://www.liulongbin.top:3006/api/addbook',
+                    data: {
+                        bookname: '水浒传',
+                        author: '葛二蛋',
+                        publisher: '上海图书出版社'
+                    },
+                    success: function(res) {
+                        console.log(res);
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>

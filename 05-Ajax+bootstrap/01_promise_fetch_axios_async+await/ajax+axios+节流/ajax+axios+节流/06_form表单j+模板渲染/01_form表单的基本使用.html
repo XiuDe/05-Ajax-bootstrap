@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form表单的基本使用</title>
+</head>
+
+<body>
+    <form action="">
+        <input type="text" name="email_or_mobile" />
+        <input type="password" name="password" />
+        <button type="submit">提交</button>
+    </form>
+    <script>
+        // 一、form表单的基本使用
+        // 1、action：
+        // · action属性用来规定当提交表单时，向何处发送表单数据。
+        // · action属性的值是后端提供的URL地址，这个URL地址专门负责接收表单提交的数据。
+        // · 当form表单在未指定action属性值的情况下，action的默认值为当前页面的url地址。
+        // 注意：当提交表单后，页面会立即跳转到action属性指定URL地址
+        // 2、target：在何处打开action URL
+        //·_blank 在新窗口打开
+        //·_self 默认。在相同的框架中打开
+        //·_parent 在父框架集中打开。（很少用）
+        //·_top 在整个窗口中打开。（很少用）
+        //·franmename 在指定的框架中打开。（很少用）
+        //3、method：method属性用来以何种方式把表单数据提交到action URL。
+        // · get或post
+        // get：提交少量的、简单的数据
+        //post：提交大量的、复杂的、或包含文件上传的数据
+        // 4、enctype:规定在发送表单数据之前如何对数据进行编码
+        // ① application/x-www-form-urlencoded 默认
+        // ② multopart/form-data 不对字符编码，在使用包含文件上传控件的表单时，必须使用改制
+        // ③ text/plain 空格转换为'+'加号，但不对特殊字符编码。(很少用)
+
+        // 5、表单同步提交的缺点：
+        // ① 页面会发生跳转
+        // ② 页面之前的状态和数据会丢失
+        // 解决方案：表单只负责采集数据，Ajax负责将数据提交到服务器。
+
+        // 二、通过Ajax提交表单数据
+        // 1、监听表单的提交事件
+        // jQuery
+        // ①
+        // $('#form1').submit(function(e){
+        // alert('监听到了表单提交事件')；
+        // e.preventDefault()
+        // })
+        // ②
+        // $('#form1').on('submit',function(e){
+        // alert('监听了表单的提交事件');
+        // e.preventDefault()
+        // })
+        // 2、阻止表单的默认事件
+        // 当监听到表单的提交事件以后，可以调用事件对象的event.preventDefault()函数，来阻止表单的提交和页面的跳转
+        // 3、快速获取表单中的数据
+        // ①、serialize()函数 必须给form表单加name
+        // $('#form1').serialize()
+        // 调用结果：username=用户名的值&password=密码的值
+    </script>
+</body>
+
+</html>

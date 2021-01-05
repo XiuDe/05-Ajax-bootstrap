@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axios</title>
+    <script src="./lib/axios.js"></script>
+    <script>
+        // axios 是专注于网络数据请求的库。
+        // 相比原生XMLHttpRequest对象，axios简单易用。
+        // 相比于jQuery，axios更加轻量化，只专注于网络数据请求。
+        // 1、axios发起GET请求
+        // axios.get('url', {
+        //     params: { /*参数*/ }
+        // }).then(callback);
+        // var url = 'http://www.liulongbin.top:3006/api/get';
+        // var paramsObj = {
+        //     name: 'zs',
+        //     age: 20
+        // }
+        // axios.get(url, {
+        //     params: paramsObj
+        // }).then(function(res) {
+        //     var result = res.data;
+        //     console.log('axios:', res)
+        // })
+    </script>
+</head>
+
+<body>
+    <button id="btn1">发起GET请求</button>
+    <button id="btn2">发起POST请求</button>
+    <button id="btn3">直接使用axios发送请求--GET</button>
+    <button id="btn4">直接使用axios发送请求--POST</button>
+    <script>
+        document.querySelector('#btn4').addEventListener('click', function() {
+            var url = 'http://www.liulongbin.top:3006/api/post';
+            var dataObj = {
+                location: '北京',
+                address: '顺义'
+            };
+            axios({
+                method: 'POST',
+                url: url,
+                data: dataObj,
+                // params: {}
+            }).then(function(res) {
+                console.log('axiosPOST:', res);
+                console.log('axiosPOST:', res.data);
+            })
+        });
+        document.querySelector('#btn3').addEventListener('click', function() {
+            var url = 'http://www.liulongbin.top:3006/api/get';
+            var dataObj = {
+                location: '北京',
+                address: '顺义'
+            };
+            axios({
+                method: 'GET',
+                url: url,
+                // data: { /*POST数据*/ },
+                params: {
+                    name: 'zs',
+                    age: 20
+                }
+            }).then(function(res) {
+                console.log('axiosGET:', res);
+                console.log('axiosGET:', res.data);
+            })
+        });
+        document.querySelector('#btn1').addEventListener('click', function() {
+            var url = 'http://www.liulongbin.top:3006/api/get';
+            var paramsObj = {
+                name: 'zs',
+                age: 20
+            };
+            axios.get(url, {
+                params: paramsObj
+            }).then(function(res) {
+                console.log('axiosGet:', res);
+                console.log('axiosGet:', res.data);
+            })
+        });
+        document.querySelector('#btn2').addEventListener('click', function() {
+            var url = 'http://www.liulongbin.top:3006/api/post';
+            var dataObj = {
+                location: '北京',
+                address: '顺义'
+            };
+            axios.post(url, dataObj).then(function(res) {
+                console.log('axiosPost:', res);
+                console.log('axiosPost:', res.data);
+            })
+        })
+    </script>
+</body>
+
+</html>
