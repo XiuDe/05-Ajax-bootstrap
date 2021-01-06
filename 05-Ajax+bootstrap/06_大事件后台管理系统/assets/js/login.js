@@ -36,7 +36,7 @@ $(function() {
         layer.msg("只想弱弱提示");
         // 成功后模拟人的点击行为
         $("#link_login").click();
-        $.post("http://ajax.frontend.itheima.net/api/reguser", {
+        $.post("/api/reguser", {
             username: $("#form_reg [name=username]").val(),
             password: $("#form_reg [name=password]").val(),
         }, function(res) {
@@ -51,12 +51,18 @@ $(function() {
     $("#form_login").submit(function(e) {
         e.preventDefault();
         layer.msg("已登录~");
+        // location.href =
+        //     "/test_5/05-Ajax+bootstrap/06_大事件后台管理系统/index.html";
         $.ajax({
-            url: "http://ajax.frontend.itheima.net//api/login",
+            url: "/api/login",
             method: "POST",
+            // 快速获取表单中的数据
             data: $(this).serialize(),
             success: function(res) {
-                console.log('已登录')
+                console.log('已登录');
+                // 保存token值，每次有权限请求都要保存
+                // 跳转到后台主页
+                location.href = '/index.html'
             }
         });
     });
