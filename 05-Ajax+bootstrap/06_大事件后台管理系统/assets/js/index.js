@@ -106,6 +106,9 @@ function mockData(user) {
         userinfo.data.nickname = user.username;
         userinfo.data.user_pic = null;
     }
+    if (!user.nickname) {
+        userinfo.data.nickname = user.username;
+    }
     localStorage.setItem("userinfo", JSON.stringify(userinfo));
 }
 // 缓存清理
