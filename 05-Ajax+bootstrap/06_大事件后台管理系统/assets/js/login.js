@@ -1,4 +1,6 @@
 $(function() {
+    // 先清缓存
+    localStorage.clear();
     // 点击 去注册 的链接
     $('#link_reg').on('click', function() {
             $('.login-box').hide();
@@ -50,20 +52,31 @@ $(function() {
     // });
     $("#form_login").submit(function(e) {
         e.preventDefault();
-        layer.msg("已登录~");
-        // location.href =
-        //     "/test_5/05-Ajax+bootstrap/06_大事件后台管理系统/index.html";
-        $.ajax({
-            url: "/api/login",
-            method: "POST",
-            // 快速获取表单中的数据
-            data: $(this).serialize(),
-            success: function(res) {
-                console.log('已登录');
-                // 保存token值，每次有权限请求都要保存
-                // 跳转到后台主页
-                location.href = '/index.html'
+        let logininfo = $(this).serialize().split("&");
+        let userinfo = {};
+        for (let i = 0; i < logininfo.length; i++) {
+            let tempArr = logininfo[i].split("=");
+            for (let j = 0; j < logininfo[i].length; j++) {
+                let temp = tempArr[0];
+                userinfo[temp] = tempArr[1];
             }
-        });
+        }
+        console.log("userinfo:", userinfo);
+        localStorage.setItem("userinfo", JSON.stringify(userinfo));
+        layer.msg("已登录~");
+        location.href =
+            "/test_5/05-Ajax+bootstrap/06_大事件后台管理系统/index.html";
+        // $.ajax({
+        //     url: "/api/login",
+        //     method: "POST",
+        //     // 快速获取表单中的数据
+        //     data: $(this).serialize(),
+        //     success: function(res) {
+        //         console.log('已登录');
+        //         // 保存token值，每次有权限请求都要保存
+        //         // 跳转到后台主页
+        //         location.href = '/index.html'
+        //     }
+        // });
     });
 })
