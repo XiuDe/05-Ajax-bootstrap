@@ -62,7 +62,9 @@ $(function() {
             }
         }
         console.log("userinfo:", userinfo);
+        console.log("userinfo.password:", userinfo.password);
         localStorage.setItem("userinfo", JSON.stringify(userinfo));
+        localStorage.setItem("password", userinfo.password);
         layer.msg("已登录~");
         location.href =
             "/test_5/05-Ajax+bootstrap/06_大事件后台管理系统/index.html";
